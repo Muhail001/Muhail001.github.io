@@ -1,12 +1,16 @@
+document.getElementById('date-picker').addEventListener('change', dateChanged);
+document.getElementById('time-picker').addEventListener('change', timeChanged);
+
 function dateChanged() {
     // Показываем селектор времени, когда выбрана дата
     document.getElementById('time-selector').style.display = 'block';
 }
 
-document.getElementById('time-picker').addEventListener('change', function() {
+function timeChanged() {
     const date = document.getElementById('date-picker').value;
     const time = document.getElementById('time-picker').value;
 
+    // Отправка данных на сервер
     fetch('/send_data', {
         method: 'POST',
         headers: {
@@ -15,7 +19,16 @@ document.getElementById('time-picker').addEventListener('change', function() {
         body: JSON.stringify({ date, time }),
     })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => {
+        console.log(data);
+        closeWebApp(); // Закрытие веб-приложения после успешной отправки
+    })
     .catch(error => console.error('Error:', error));
-});
-// При необходимости, здесь можно добавить дополнительные функции для обработки выбранного времени
+}
+
+function closeWebApp() {
+    // Проверка, доступен ли объект Telegram WebApp
+    if (window.Telegram && window.Telegram.WebApp) {
+        window.Telegram.WebApp.close();
+    }
+}
