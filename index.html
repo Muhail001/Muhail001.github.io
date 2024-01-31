@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Телеграм Календарь</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <div class="calendar-container">
+        <input type="date" id="date-picker" onchange="dateChanged()">
+        <div id="time-selector" style="display:none;">
+            <label for="time">Выберите время:</label>
+            <input type="time" id="time">
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
